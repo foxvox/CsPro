@@ -1,21 +1,33 @@
 ﻿namespace CsPro
 {
+	interface INamedValue
+	{
+		string Name { get; set; }
+		string Value { get; set; }
+	}
+
+	class NamedValue : INamedValue
+	{
+		public string Name { get; set; }
+		public string Value { get; set; }
+	}
+
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			var a = new { Name = "박상현", Age = 123 }; 
-			Console.WriteLine($"Name: {a.Name}, Age: {a.Age}");
+				NamedValue name = new NamedValue()
+				{ Name = "이름", Value = "박상현"	};
 
-			var b = new { Subject = "수학", Score = new int[] { 90, 80, 70, 60 } };
+				NamedValue height = new NamedValue()
+				{ Name = "키", Value = "177Cm" };
 
-			Console.Write($"Subject: {b.Subject}, Score: ");
-			foreach (var score in b.Score) 
-			{ 
-				Console.Write($"{score} ");				
-			}
+				NamedValue weight = new NamedValue()
+				{ Name = "몸무게", Value = "90Kg" };
 
-			Console.WriteLine();
+				Console.WriteLine($"{name.Name}: {name.Value}");
+				Console.WriteLine($"{height.Name}: {height.Value}");
+				Console.WriteLine($"{weight.Name}: {weight.Value}");  
 		}
 	}
 }
