@@ -1,33 +1,41 @@
 ﻿namespace CsPro
 {
-	interface INamedValue
+	abstract class Product
 	{
-		string Name { get; set; }
-		string Value { get; set; }
+		private static int serial = 0; 
+		public string SerialID
+		{
+			get { return String.Format("{0:d5}", serial++);  }
+		}
+
+		abstract public DateTime ProductDate 
+		{ 
+			get; 
+			set; 
+		} 	
 	}
 
-	class NamedValue : INamedValue
+	class MyProduct : Product
 	{
-		public string Name { get; set; }
-		public string Value { get; set; }
+		public override DateTime ProductDate 
+		{ 
+			get; 
+			set; 
+		}
 	}
+
 
 	class Program
 	{
 		static void Main(string[] args)
 		{
-				NamedValue name = new NamedValue()
-				{ Name = "이름", Value = "박상현"	};
+			Product product1 = new MyProduct()
+			{ ProductDate = new DateTime(2018, 1, 10) }; 
+			Console.WriteLine("Product: {0}, Product Date: {1}", product1.SerialID, product1.ProductDate);
 
-				NamedValue height = new NamedValue()
-				{ Name = "키", Value = "177Cm" };
-
-				NamedValue weight = new NamedValue()
-				{ Name = "몸무게", Value = "90Kg" };
-
-				Console.WriteLine($"{name.Name}: {name.Value}");
-				Console.WriteLine($"{height.Name}: {height.Value}");
-				Console.WriteLine($"{weight.Name}: {weight.Value}");  
+			Product product2 = new MyProduct()
+			{ ProductDate = new DateTime(2018, 2, 3) };
+			Console.WriteLine("Product: {0}, Product Date: {1}", product2.SerialID, product2.ProductDate);
 		}
 	}
 }
