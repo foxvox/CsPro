@@ -4,19 +4,20 @@
 	{
 		static void Main(string[] args)
 		{
-			int[] scores = new int[5];
-			scores[0] = 80; scores[1] = 74; scores[2] = 81; scores[^2] = 90; scores[^1] = 34; 
+			string[] array1 = new string[3] { "안녕", "Hello", "Halo" };  
+			Console.WriteLine("array1..."); 
+			foreach (string greeting in array1) 
+				Console.WriteLine($" {greeting}");
 
-			foreach (int score in scores) 
-				Console.WriteLine(score);
+			string[] array2 = new string[] { "안녕", "Hello", "Halo" };
+			Console.WriteLine("\narray2...");
+			foreach (string greeting in array2)
+				Console.WriteLine($" {greeting}");
 
-			int sum = 0; 
-			foreach (int score in scores) 
-				sum += score; 
-
-			int average = sum / scores.Length; 
-
-			Console.WriteLine($"Average Score: {average}"); 
+			string[] array3 = { "안녕", "Hello", "Halo" };
+			Console.WriteLine("\narray3...");
+			foreach (string greeting in array3)
+				Console.WriteLine($" {greeting}");
 		}
 	}
 }
