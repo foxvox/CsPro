@@ -2,30 +2,41 @@
 {
 	class Program
 	{
-		static void PrintArray(System.Array array)
-		{
-			foreach (var e in array)
-				Console.Write(e); 
-			Console.WriteLine(); 
-		}
-
-
 		static void Main(string[] args)
 		{
-			char[] array = new char['Z' - 'A' + 1];
-			for (int i = 0; i < array.Length; i++) array[i] = (char)('A' + i);
+			int[,] arr = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } }; 
+			for (int i = 0; i < arr.GetLength(0); i++)
+			{
+				for (int j = 0; j < arr.GetLength(1); j++)
+				{
+					Console.Write($"[{i}, {j}]: {arr[i, j]}\t"); 
+				}
+				Console.WriteLine(); 
+			}
+			Console.WriteLine(); 
 
-			PrintArray(array[..]);
-			PrintArray(array[5..]);
+			int[,] arr2 = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+			for (int i = 0; i < arr2.GetLength(0); i++)
+			{
+				for (int j = 0; j < arr2.GetLength(1); j++)
+				{
+					Console.Write($"[{i}, {j}]: {arr2[i, j]}\t");
+				}
+				Console.WriteLine();
+			}
+			Console.WriteLine();
 
-			Range range_5_10 = 5..10;
-			PrintArray(array[range_5_10]);
+			int[,] arr3 = { { 1, 2, 3 }, { 4, 5, 6 } };
 
-			Index last = ^0;
-			Range range_5_last = 5..last;
-			PrintArray(array[range_5_last]);
-
-			PrintArray(array[^4..^1]); 
+			for (int i = 0; i < arr3.GetLength(0); i++)
+			{
+				for (int j = 0; j < arr3.GetLength(1); j++)
+				{
+					Console.Write($"[{i}, {j}]: {arr3[i, j]}\t"); 
+				}
+				Console.WriteLine();
+			}
+			Console.WriteLine();
 		}
 	}
 }
