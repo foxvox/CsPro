@@ -1,41 +1,24 @@
-﻿namespace CsPro
+﻿using System.Xml.Schema;
+
+namespace CsPro
 {
-	abstract class Product
-	{
-		private static int serial = 0; 
-		public string SerialID
-		{
-			get { return String.Format("{0:d5}", serial++);  }
-		}
-
-		abstract public DateTime ProductDate 
-		{ 
-			get; 
-			set; 
-		} 	
-	}
-
-	class MyProduct : Product
-	{
-		public override DateTime ProductDate 
-		{ 
-			get; 
-			set; 
-		}
-	}
-
-
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			Product product1 = new MyProduct()
-			{ ProductDate = new DateTime(2018, 1, 10) }; 
-			Console.WriteLine("Product: {0}, Product Date: {1}", product1.SerialID, product1.ProductDate);
+			int[] scores = new int[5]; 
+			scores[0] = 80; scores[1] = 74; scores[2] = 81; scores[3] = 90; scores[4] = 34; 
 
-			Product product2 = new MyProduct()
-			{ ProductDate = new DateTime(2018, 2, 3) };
-			Console.WriteLine("Product: {0}, Product Date: {1}", product2.SerialID, product2.ProductDate);
+			foreach (int score in scores) 
+				Console.WriteLine(score);
+
+			int sum = 0; 
+			foreach (int score in scores) 
+				sum += score; 
+
+			int average = sum / scores.Length; 
+
+			Console.WriteLine($"Average Score: {average}"); 
 		}
 	}
 }
