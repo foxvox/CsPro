@@ -2,62 +2,30 @@
 {
 	class Program
 	{
-		private static bool CheckPassed(int score)
+		static void PrintArray(System.Array array)
 		{
-			return score >= 60; 
+			foreach (var e in array)
+				Console.Write(e); 
+			Console.WriteLine(); 
 		}
 
-		private static void Print(int value)
-		{
-			Console.Write($"{value} "); 
-		}
 
 		static void Main(string[] args)
 		{
-			int[] scores = new int[] { 80, 74, 81, 90, 34 };
+			char[] array = new char['Z' - 'A' + 1];
+			for (int i = 0; i < array.Length; i++) array[i] = (char)('A' + i);
 
-			foreach (int score in scores)
-				Console.Write($"{score} "); 
-			Console.WriteLine();
+			PrintArray(array[..]);
+			PrintArray(array[5..]);
 
-			Array.Sort(scores); 
-			Array.ForEach<int>(scores, new Action<int>(Print));
-			Console.WriteLine();
+			Range range_5_10 = 5..10;
+			PrintArray(array[range_5_10]);
 
-			Console.WriteLine($"Number of dimemsions: {scores.Rank}"); 
+			Index last = ^0;
+			Range range_5_last = 5..last;
+			PrintArray(array[range_5_last]);
 
-			Console.WriteLine($"Binary Search: 81 is at " + 
-				$"{Array.BinarySearch<int>(scores, 81)}");
-
-			Console.WriteLine($"Linear Search: 90 is at " +
-				$"{Array.IndexOf(scores, 90)}");
-
-			Console.WriteLine($"Everyone passed?: " +
-				$"{Array.TrueForAll<int>(scores, CheckPassed)}");
-
-			int index = Array.FindIndex<int>(scores, (score) => score < 60);
-
-			scores[index] = 61;
-			Console.WriteLine($"Everyone passed?: " +
-				$"{Array.TrueForAll<int>(scores, CheckPassed)}");
-
-			Console.WriteLine("Old length of scores: " +
-				$"{scores.GetLength(0)}");
-
-			Array.Resize<int>(ref scores, 10);
-			Console.WriteLine($"New length of scores: {scores.Length}");  
-
-			Array.ForEach<int>(scores, new Action<int>(Print)); 
-			Console.WriteLine(); 
-
-			Array.Clear(scores, 3, 7); 
-			Array.ForEach<int>(scores, new Action<int>(Print));
-			Console.WriteLine();
-
-			int[] sliced = new int[3];
-			Array.Copy(scores, 0, sliced, 0, 3); 
-			Array.ForEach<int>(sliced, new Action<int>(Print)); 
-			Console.WriteLine();
+			PrintArray(array[^4..^1]); 
 		}
 	}
 }
