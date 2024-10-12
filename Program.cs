@@ -1,42 +1,101 @@
-﻿namespace CsPro
+﻿using System;
+using System.Collections;
+using System.Collections.Generic; 
+
+namespace CsPro
 {
+	class MyList<T> : IEnumerable<T>, IEnumerator<T>
+	{
+		private T[] array;
+		int position = -1;
+
+		public MyList()
+		{
+			array = new T[3];
+		}
+
+		public T this[int index]
+		{
+			get
+			{
+				return array[index];
+			}
+
+			set
+			{
+				if (index >= array.Length)
+				{
+					Array.Resize(ref array, index + 1);
+					Console.WriteLine($"Array Resized: {array.Length}");
+				}
+
+				array[index] = value; 
+			}
+		}
+
+		public int Length 
+		{ 
+			get { return array.Length; } 
+		}
+
+		public IEnumerator<T> GetEnumerator()
+		{
+			return this; 
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return this;
+		}
+
+		public T Current
+		{
+			get { return array[position]; } 
+		} 
+
+		object IEnumerator.Current
+		{
+			get { return array[position]; }
+		}
+
+		public void Reset()
+		{
+			position = -1; 
+		}
+
+		public void Dispose()
+		{} 
+
+		public bool MoveNext()
+		{
+			if (position == array.Length - 1)
+			{
+				Reset(); 
+				return false; 
+			}
+
+			position++;
+			return (position < array.Length); 
+		}
+	}
+
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			int[,] arr = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } }; 
-			for (int i = 0; i < arr.GetLength(0); i++)
-			{
-				for (int j = 0; j < arr.GetLength(1); j++)
-				{
-					Console.Write($"[{i}, {j}]: {arr[i, j]}\t"); 
-				}
-				Console.WriteLine(); 
-			}
+			MyList<string> strList = new MyList<string>(); 
+			strList[0] = "abc"; strList[1] = "def"; strList[2] = "ghi"; strList[3] = "jkl"; strList[4] = "mno";
+
+			foreach (string str in strList)			
+				Console.WriteLine(str);			
 			Console.WriteLine(); 
 
-			int[,] arr2 = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
-			for (int i = 0; i < arr2.GetLength(0); i++)
-			{
-				for (int j = 0; j < arr2.GetLength(1); j++)
-				{
-					Console.Write($"[{i}, {j}]: {arr2[i, j]}\t");
-				}
-				Console.WriteLine();
-			}
-			Console.WriteLine();
+			MyList<int> intList = new MyList<int>(); 
+			intList[0] = 0; intList[1] = 1; intList[2] = 2; intList[3] = 3; intList[4] = 4; 
 
-			int[,] arr3 = { { 1, 2, 3 }, { 4, 5, 6 } };
-
-			for (int i = 0; i < arr3.GetLength(0); i++)
-			{
-				for (int j = 0; j < arr3.GetLength(1); j++)
-				{
-					Console.Write($"[{i}, {j}]: {arr3[i, j]}\t"); 
-				}
-				Console.WriteLine();
-			}
-			Console.WriteLine();
+			foreach (int i in intList) 
+				Console.WriteLine(i); 
+			Console.WriteLine(); 		
 		}
 	}
 }
