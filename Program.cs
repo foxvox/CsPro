@@ -1,23 +1,31 @@
-﻿namespace CsPro
+﻿using System.Linq.Expressions; 
+
+namespace CsPro
 {
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			Action act1 = () => Console.WriteLine("Action()");
-			act1(); 
+			Expression const1 = Expression.Constant(1);
+			Expression const2 = Expression.Constant(2);
 
-			int result = 0;
-			Action<int> act2 = (x) => result = x * x;
-			act2(3);
-			Console.WriteLine($"result: {result}");
+			Expression leftExp = Expression.Multiply(const1, const2);
 
-			Action<double, double> act3 = (x, y) =>
-			{
-				double pi = x / y;
-				Console.WriteLine($"Action<T1, T2>({x}, {y}): {pi}");
-			};
-			act3(22.0, 7.0); 		
+			Expression param1 = Expression.Parameter(typeof(int)); 
+			Expression param2 = Expression.Parameter(typeof(int));
+
+			Expression rightExp = Expression.Subtract(param1, param2);
+
+			Expression exp = Expression.Add(leftExp, rightExp);
+
+			Expression<Func<int, int, int>> expression =
+				Expression<Func<int, int, int>>.Lambda<Func<int, int, int>>(exp,
+				new ParameterExpression[] { (ParameterExpression)param1, (ParameterExpression)param2 });
+
+			Func<int, int, int> func = expression.Compile();
+
+			Console.WriteLine($"1 * 2 + ({7} - {8}) = {func(7, 8)}"); 
+		
 		}
 	}
 }
