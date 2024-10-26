@@ -1,34 +1,77 @@
 ﻿
 namespace CsPro
 {
-	delegate int MyDelegate(int a, int b);
-
-	class Calculator
-	{
-		public int Plus(int a, int b)
-		{
-			return a + b;
-		}
-
-		public static int Minus(int a, int b)
-		{
-			return a - b;
-		}
-	}
-
+	delegate int Compare(int a, int b); 
 
 	class Program
 	{
+		static int AscendCompare(int a, int b)
+		{
+			if (a > b)
+				return 1; 
+			else if (a == b) 
+				return 0;
+			else 
+				return -1; 
+		}
+
+		static int DescendCompare(int a, int b)
+		{
+			if (a < b)
+				return 1;
+			else if (a == b)
+				return 0; 
+			else 
+				return -1; 
+		}
+
+		static void BubbleSort(int[] DataSet, Compare Comparer)
+		{
+			int i = 0;
+			int j = 0;
+			int temp = 0;
+
+			for (i = 0; i < DataSet.Length - 1; i++)
+			{
+				for (j = 0; j < DataSet.Length - (i + 1); j++)
+				{
+					if (Comparer(DataSet[j], DataSet[j + 1]) > 0)
+					{
+						temp = DataSet[j + 1]; 
+						DataSet[j + 1] = DataSet[j]; 
+						DataSet[j] = temp; 
+					}
+				}
+			}
+		}
+
 		static void Main(string[] args)
 		{
-			Calculator calc = new Calculator();
-			MyDelegate Callback;
+			int[] array = { 3, 7, 4, 2, 10 };
 
-			Callback = new MyDelegate(calc.Plus);
-			Console.WriteLine(Callback(3, 4));
+			for (int i = 0; i < array.Length; i++)
+				Console.Write($"{array[i]} ");
 
-			Callback = new MyDelegate(Calculator.Minus); 
-			Console.WriteLine(Callback(7, 5)); 			 		
+			Console.WriteLine("\nSorting Ascending...");
+			BubbleSort(array, new Compare(AscendCompare));
+
+			for (int i = 0; i < array.Length; i++)
+				Console.Write($"{array[i]} ");
+
+			Console.WriteLine("\n");
+
+			int[] array2 = { 7, 2, 8, 10, 11 };
+
+			for (int i = 0; i < array2.Length; i++)
+				Console.Write($"{array2[i]} ");
+
+			Console.WriteLine("\nSorting Descending..."); 
+			BubbleSort(array2, new Compare(DescendCompare));
+
+			for (int i = 0; i < array2.Length; i++)
+				Console.Write($"{array2[i]} ");
+
+			Console.WriteLine(); 		 		
 		}
 	}
 }
