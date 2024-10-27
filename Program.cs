@@ -1,38 +1,15 @@
 ﻿
 namespace CsPro
 {
-	delegate void EventHandler(string message);
-
-	class Notifier
-	{
-		public event EventHandler SomethingHappened;
-		public void Dosomething(int number)
-		{
-			int temp = number % 10;
-
-			if (temp != 0 && temp % 3 == 0)
-			{
-				SomethingHappened(String.Format("{0}: 짝", number));
-			}
-		}
-	}
-
 	class Program
 	{
-		static public void MyHandler(string message)
-		{
-			Console.WriteLine(message);
-		}	
+		delegate int Calculate(int a, int b); 
 
 		static void Main(string[] args)
 		{
-			Notifier notifier = new Notifier();
-			notifier.SomethingHappened += new EventHandler(MyHandler);
+			Calculate calc = (a, b) => a + b;
 
-			for (int i = 0; i < 30; i++)
-			{
-				notifier.Dosomething(i);
-			}	
+			Console.WriteLine($"{3} + {4} : {calc(3, 4)}");
 		}
 	}
 }
