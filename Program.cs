@@ -1,64 +1,38 @@
 ﻿
 namespace CsPro
 {
-	delegate int Compare(int a, int b); 
+	delegate void EventHandler(string message);
+
+	class Notifier
+	{
+		public event EventHandler SomethingHappened;
+		public void Dosomething(int number)
+		{
+			int temp = number % 10;
+
+			if (temp != 0 && temp % 3 == 0)
+			{
+				SomethingHappened(String.Format("{0}: 짝", number));
+			}
+		}
+	}
 
 	class Program
 	{
-		static void BubbleSort(int[] DataSet, Compare Comparer)
+		static public void MyHandler(string message)
 		{
-			int i = 0;
-			int j = 0;
-			int temp = 0;
-
-			for (i = 0; i < DataSet.Length - 1; i++)
-			{
-				for (j = 0; j < DataSet.Length - (i + 1); j++)
-				{
-					if (Comparer(DataSet[j], DataSet[j + 1]) > 0)
-					{
-						temp = DataSet[j + 1]; DataSet[j + 1] = DataSet[j]; DataSet[j] = temp;
-					}					
-				}
-			}
-		}
+			Console.WriteLine(message);
+		}	
 
 		static void Main(string[] args)
 		{
-			int[] array = { 3, 7, 4, 2, 10 };
+			Notifier notifier = new Notifier();
+			notifier.SomethingHappened += new EventHandler(MyHandler);
 
-			Console.WriteLine("Sorting ascending...");
-			// 익명 메소드 사용 
-			BubbleSort(array, delegate(int a, int b)
+			for (int i = 0; i < 30; i++)
 			{
-				if (a > b)
-					return 1;
-				else if (a == b)
-					return 0; 
-				else 
-					return -1; 
-			}); 
-
-			for (int i = 0; i < array.Length; i++) 
-				Console.Write($"{array[i]} ");
-
-			int[] array2 = { 7, 2, 8, 10, 11 };
-			Console.WriteLine("\nSorting descending...");
-			//익명 메소드 사용 
-			BubbleSort(array2, delegate (int a, int b)
-			{
-				if (a < b)
-					return 1;
-				else if (a == b)
-					return 0;
-				else
-					return -1;
-			});
-
-			for (int i = 0; i < array2.Length; i++)
-				Console.Write($"{array2[i]} "); 
-
-			Console.WriteLine(); 
+				notifier.Dosomething(i);
+			}	
 		}
 	}
 }
