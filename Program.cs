@@ -1,65 +1,64 @@
 ﻿
 namespace CsPro
 {
-	// 대리자 => 함수 참조 클래스  
-	delegate void Notify(string _message); 
-	
-	class Notifier
-	{
-		public Notify EventOccured; 
-	}
-
-	class EventListener
-	{
-		private string name; 
-		public EventListener(string _name)
-		{
-			name = _name; 
-		}
-
-		public void SomethingHappened(string _message)
-		{
-			Console.WriteLine($"{name}.SomethingHappened: {_message}"); 
-		}
-	}
+	delegate int Compare(int a, int b); 
 
 	class Program
 	{
+		static void BubbleSort(int[] DataSet, Compare Comparer)
+		{
+			int i = 0;
+			int j = 0;
+			int temp = 0;
+
+			for (i = 0; i < DataSet.Length - 1; i++)
+			{
+				for (j = 0; j < DataSet.Length - (i + 1); j++)
+				{
+					if (Comparer(DataSet[j], DataSet[j + 1]) > 0)
+					{
+						temp = DataSet[j + 1]; DataSet[j + 1] = DataSet[j]; DataSet[j] = temp;
+					}					
+				}
+			}
+		}
+
 		static void Main(string[] args)
 		{
-			Notifier notifier = new Notifier();
-			EventListener listener1 = new EventListener("Listener1");
-			EventListener listener2 = new EventListener("Listener2");
-			EventListener listener3 = new EventListener("Listener3");
+			int[] array = { 3, 7, 4, 2, 10 };
 
-			notifier.EventOccured += listener1.SomethingHappened;
-			notifier.EventOccured += listener2.SomethingHappened;
-			notifier.EventOccured += listener3.SomethingHappened;
-			notifier.EventOccured("You've go mail.");
+			Console.WriteLine("Sorting ascending...");
+			// 익명 메소드 사용 
+			BubbleSort(array, delegate(int a, int b)
+			{
+				if (a > b)
+					return 1;
+				else if (a == b)
+					return 0; 
+				else 
+					return -1; 
+			}); 
 
-			Console.WriteLine();
+			for (int i = 0; i < array.Length; i++) 
+				Console.Write($"{array[i]} ");
 
-			notifier.EventOccured -= listener2.SomethingHappened;
-			notifier.EventOccured("Download complete."); 
+			int[] array2 = { 7, 2, 8, 10, 11 };
+			Console.WriteLine("\nSorting descending...");
+			//익명 메소드 사용 
+			BubbleSort(array2, delegate (int a, int b)
+			{
+				if (a < b)
+					return 1;
+				else if (a == b)
+					return 0;
+				else
+					return -1;
+			});
 
-			Console.WriteLine();
+			for (int i = 0; i < array2.Length; i++)
+				Console.Write($"{array2[i]} "); 
 
-			notifier.EventOccured = new Notify(listener1.SomethingHappened) 
-									+ new Notify(listener3.SomethingHappened);
-			notifier.EventOccured("Nuclear launch detected."); 
-
-			Console.WriteLine();
-
-			Notify notify1 = new Notify(listener1.SomethingHappened); 
-			Notify notify2 = new Notify(listener2.SomethingHappened);
-
-			notifier.EventOccured = (Notify)Delegate.Combine(notify1, notify2);
-			notifier.EventOccured("Fire"); 
-
-			Console.WriteLine();
-
-			notifier.EventOccured = (Notify)Delegate.Remove(notifier.EventOccured, notify2);
-			notifier.EventOccured("RPG!"); 
+			Console.WriteLine(); 
 		}
 	}
 }
