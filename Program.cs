@@ -5,14 +5,20 @@ namespace CsPro
 	{
 		static void Main(string[] args)
 		{
-			Func<int> func1 = () => 10; 
-			Console.WriteLine($"func1(): {func1()}");
+			Action act1 = () => Console.WriteLine("act1()");
+			act1();
 
-			Func<int, int> func2 = (x) => x * 2;
-			Console.WriteLine($"func2(4): {func2(4)}");
+			int result = 0;
+			Action<int> act2 = (x) => result = x * x;
+			act2(3);
+			Console.WriteLine($"act2(3): result: {result}");
 
-			Func<double, double, double> func3 = (x, y) => x / y;
-			Console.WriteLine($"func3(22, 7): {func3(22, 7)}"); 		
+			Action<double, double> act3 = (x, y) =>
+			{
+				double pi = x / y;
+				Console.WriteLine($"act3<double, double>({x}, {y}): {pi}"); 
+			};
+			act3(22.0, 7.0); 		
 		}
 	}
 }
