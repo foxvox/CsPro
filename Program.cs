@@ -3,20 +3,16 @@ namespace CsPro
 {
 	class Program
 	{
-		delegate string Concatenate(string[] args); 
-
 		static void Main(string[] args)
 		{
-			Concatenate concat = (arr) =>
-			{
-				string result = "";
-				foreach (string s in arr)
-					result += s;
+			Func<int> func1 = () => 10; 
+			Console.WriteLine($"func1(): {func1()}");
 
-				return result;
-			}; 
+			Func<int, int> func2 = (x) => x * 2;
+			Console.WriteLine($"func2(4): {func2(4)}");
 
-			Console.WriteLine(concat(args));			
+			Func<double, double, double> func3 = (x, y) => x / y;
+			Console.WriteLine($"func3(22, 7): {func3(22, 7)}"); 		
 		}
 	}
 }
