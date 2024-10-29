@@ -6,6 +6,7 @@ namespace CsPro
 	{
 		static void Main(string[] args)
 		{
+			/*
 			Expression const1 = Expression.Constant(1);
 			Expression const2 = Expression.Constant(2);
 			Expression leftExp = Expression.Multiply(const1, const2);
@@ -21,6 +22,10 @@ namespace CsPro
 				(
 					exp, new ParameterExpression[] {(ParameterExpression)param1, (ParameterExpression)param2}
 				);
+			*/
+
+			Expression<Func<int, int, int>> expression =
+				(a, b) => (1 * 2) + (a - b); 
 
 			Func<int, int, int> func = expression.Compile();
 
