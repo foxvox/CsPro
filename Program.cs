@@ -1,35 +1,35 @@
-﻿using System.Linq.Expressions; 
+﻿using System.Threading; 
 
 namespace CsPro
 {
 	class Program
 	{
+		static void DoSomething()
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				Console.WriteLine($"DoSomething: {i}");
+				Thread.Sleep(10); 
+			}
+		}
+
 		static void Main(string[] args)
 		{
-			/*
-			Expression const1 = Expression.Constant(1);
-			Expression const2 = Expression.Constant(2);
-			Expression leftExp = Expression.Multiply(const1, const2);
+			Thread t1 = new Thread(DoSomething);
 
-			Expression param1 = Expression.Parameter(typeof(int)); 
-			Expression param2 = Expression.Parameter(typeof(int));
-			Expression rightExp = Expression.Subtract(param1, param2);
+			Console.WriteLine("Starting thread..."); 
+			t1.Start();
 
-			Expression exp = Expression.Add(leftExp, rightExp); 
+			for (int i = 0; i < 10; i++)
+			{
+				Console.WriteLine($"Main: {i}");
+				Thread.Sleep(10);
+			}
 
-			Expression<Func<int, int, int>> expression = 
-				Expression<Func<int, int, int>>.Lambda<Func<int, int, int>>
-				(
-					exp, new ParameterExpression[] {(ParameterExpression)param1, (ParameterExpression)param2}
-				);
-			*/
+			Console.WriteLine("Waiting until thread stops...");
+			t1.Join();
 
-			Expression<Func<int, int, int>> expression =
-				(a, b) => (1 * 2) + (a - b); 
-
-			Func<int, int, int> func = expression.Compile();
-
-			Console.WriteLine($"(1 * 2) + (7 - 8) = {func(7, 8)}"); 	
+			Console.WriteLine("Finished"); 	
 		}
 	}
 }
