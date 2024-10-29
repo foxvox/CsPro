@@ -1,56 +1,29 @@
-﻿using System.Threading; 
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Threading; 
 
 namespace CsPro
 {
 	class Program
 	{
-		class SideTask
+		private static void PrintThreadState(ThreadState state)
 		{
-			int count;
-			public SideTask(int _count)
-			{
-				count = _count;
-			}
-
-			public void KeepAlive()
-			{
-				try
-				{
-					while (count > 0)
-					{
-						Console.WriteLine($"{count--} left");
-						Thread.Sleep(10);
-					}
-				}
-				catch (ThreadAbortException e)
-				{
-					Console.WriteLine(e);
-					//Thread.ResetAbort();
-				}
-				finally
-				{
-					Console.WriteLine("Clearing resource...");
-				}
-			}
+			Console.WriteLine("{0, -16}: {1}", state, (int)state);
 		}
 
 		static void Main(string[] args)
 		{
-			SideTask task = new SideTask(100);
-			Thread t1 = new Thread(new ThreadStart(task.KeepAlive));
-			t1.IsBackground = false;
-
-			Console.WriteLine("Starting thread...");
-			t1.Start();
-			Thread.Sleep(100);
-
-			Console.WriteLine("Aborting thread...");
-			//t1.Abort();
-
-			Console.WriteLine("Waiting until thread stops...");
-			t1.Join();
-
-			Console.WriteLine("Finished");  	
+			PrintThreadState(ThreadState.Running);
+			PrintThreadState(ThreadState.StopRequested);
+			PrintThreadState(ThreadState.SuspendRequested);
+			PrintThreadState(ThreadState.Background); 
+			PrintThreadState(ThreadState.Unstarted);			
+			PrintThreadState(ThreadState.Stopped);
+			PrintThreadState(ThreadState.WaitSleepJoin);
+			PrintThreadState(ThreadState.Suspended);
+			PrintThreadState(ThreadState.AbortRequested); 
+			PrintThreadState(ThreadState.Aborted);
+			PrintThreadState(ThreadState.Aborted | ThreadState.Stopped); 
 		}
 	}
 }
