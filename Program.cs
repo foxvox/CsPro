@@ -4,32 +4,53 @@ namespace CsPro
 {
 	class Program
 	{
-		static void DoSomething()
+		class SideTask
 		{
-			for (int i = 0; i < 10; i++)
+			int count;
+			public SideTask(int _count)
 			{
-				Console.WriteLine($"DoSomething: {i}");
-				Thread.Sleep(10); 
+				count = _count;
+			}
+
+			public void KeepAlive()
+			{
+				try
+				{
+					while (count > 0)
+					{
+						Console.WriteLine($"{count--} left");
+						Thread.Sleep(10);
+					}
+				}
+				catch (ThreadAbortException e)
+				{
+					Console.WriteLine(e);
+					//Thread.ResetAbort();
+				}
+				finally
+				{
+					Console.WriteLine("Clearing resource...");
+				}
 			}
 		}
 
 		static void Main(string[] args)
 		{
-			Thread t1 = new Thread(DoSomething);
+			SideTask task = new SideTask(100);
+			Thread t1 = new Thread(new ThreadStart(task.KeepAlive));
+			t1.IsBackground = false;
 
-			Console.WriteLine("Starting thread..."); 
+			Console.WriteLine("Starting thread...");
 			t1.Start();
+			Thread.Sleep(100);
 
-			for (int i = 0; i < 10; i++)
-			{
-				Console.WriteLine($"Main: {i}");
-				Thread.Sleep(10);
-			}
+			Console.WriteLine("Aborting thread...");
+			//t1.Abort();
 
 			Console.WriteLine("Waiting until thread stops...");
 			t1.Join();
 
-			Console.WriteLine("Finished"); 	
+			Console.WriteLine("Finished");  	
 		}
 	}
 }
