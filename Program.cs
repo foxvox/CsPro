@@ -8,41 +8,45 @@ namespace CsPro
 {
 	class Program
 	{
-		async static private void MyMethodAsync(int count)
+		// 파일 복사 후 복사한 파일 용량 반환 
+		static async Task<long> CopyAsync(string FromPath, string ToPath)
 		{
-			Console.WriteLine("C");
-			Console.WriteLine("D");
-
-			await Task.Run(async () =>
+			using var fromStream = new FileStream(FromPath, FileMode.Open); 
 			{
-				for (int i = 1; i <= count; i++)
-				{
-					Console.WriteLine($"{i} / {count} ...");
-					await Task.Delay(1000);
-				}
-			});
+				long totalCopied = 0;
 
-			Console.WriteLine("G");
-			Console.WriteLine("H"); 
+				using var toStream = new FileStream(ToPath, FileMode.Create); 
+				{
+					byte[] buffer = new byte[1024];
+					int nRead = 0;
+					while ((nRead = await fromStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+					{
+						await toStream.WriteAsync(buffer, 0, nRead);
+						totalCopied += nRead;
+					}
+				}
+
+				return totalCopied;
+			}
 		}
 
-		static void Caller()
+		static async void DoCopy(string FromPath, string ToPath)
 		{
-			Console.WriteLine("A"); 
-			Console.WriteLine("B");
-
-			MyMethodAsync(3); 
-
-			Console.WriteLine("E");
-			Console.WriteLine("F");
+			long totalCopied = await CopyAsync(FromPath, ToPath);
+			Console.WriteLine($"Copied Total {totalCopied} Bytes."); 
 		}
 
 		static void Main(string[] args)
 		{
-			Caller();
+			if (args.Length < 2)
+			{
+				Console.WriteLine("Usage: ./CsPro <source> <destination>");
+				return; 
+			}
 
-			Console.ReadLine(); 
+			DoCopy(args[0], args[1]);
 
+			Console.WriteLine(); 
 		}
 	}
 }
