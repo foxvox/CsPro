@@ -1,38 +1,64 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Security.Permissions; 
 using System.Threading;
 
 namespace CsPro
 {
-	class Program
+	class SideTask
 	{
-		private static Thread workerThread;
-		private static bool isRunning = true;
+		int count;
 
-		static void Main(string[] args)
+		public SideTask(int count)
 		{
-			// 스레드 생성 및 시작
-			workerThread = new Thread(DoWork);
-			workerThread.Start();
-
-			Console.WriteLine("Press Enter to stop the worker thread...");
-			Console.ReadLine();
-
-			// 스레드 중단
-			isRunning = false;
-
-			// 스레드가 종료될 때까지 대기
-			workerThread.Join();
-			Console.WriteLine("Worker thread has stopped.");
+			this.count = count;
 		}
 
-		private static void DoWork()
+		public void KeepAlive()
 		{
-			while (isRunning)
+			try
 			{
-				Console.WriteLine("Working...");
-				Thread.Sleep(1000); // 1초 대기
+				Console.WriteLine("Running thread isn't gonna be interrupted");
+				Thread.SpinWait(100000000);
+
+				while (count > 0)
+				{
+					Console.WriteLine($"{count--} left");
+
+					Console.WriteLine("Entering into WaitJoinSleep State...");
+					Thread.Sleep(10);
+				}
+				Console.WriteLine("Count: 0");
 			}
+			catch (ThreadInterruptedException e)
+			{
+				Console.WriteLine(e);
+			}
+			finally
+			{
+				Console.WriteLine("Clearing resource...");
+			}
+		}
+
+	}
+
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			SideTask task = new SideTask(100);
+			Thread t1 = new Thread(new ThreadStart(task.KeepAlive));
+			t1.IsBackground = false;
+
+			Console.WriteLine("Starting thread..."); 
+			t1.Start();			
+
+			Console.WriteLine("Interrupting thread...");
+			t1.Interrupt();
+
+			Console.WriteLine("Waiting until thread stops...");
+			t1.Join();
+
+			Console.WriteLine("Finished"); 
 		}
 	}
 }
