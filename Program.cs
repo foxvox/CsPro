@@ -27,9 +27,14 @@ namespace CsPro
 
 			while (loopCount-- > 0)
 			{
-				lock (thisLock)
+				Monitor.Enter(thisLock);
+				try
 				{
 					count++;
+				}
+				finally
+				{
+					Monitor.Exit(thisLock);
 				}
 				Thread.Sleep(1);
 			}
@@ -40,9 +45,14 @@ namespace CsPro
 			int loopCount = LOOP_COUNT;
 			while (loopCount-- > 0)
 			{
-				lock (thisLock)
+				Monitor.Enter(thisLock);
+				try
 				{
 					count--;
+				}
+				finally
+				{
+					Monitor.Exit(thisLock);
 				}
 				Thread.Sleep(1);
 			}
