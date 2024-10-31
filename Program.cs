@@ -6,8 +6,9 @@ namespace CsPro
 {
 	class Counter 
 	{
-		const int LOOP_COUNT = 100;
+		const int LOOP_COUNT = 1000;
 		readonly object thisLock;
+		bool lockedCount = false; 
 
 		private int count; 
 		public int Count
@@ -27,16 +28,16 @@ namespace CsPro
 
 			while (loopCount-- > 0)
 			{
-				Monitor.Enter(thisLock);
-				try
+				lock (thisLock)
 				{
+					while (count > 0 || lockedCount == true)
+						Monitor.Wait(thisLock);
+
+					lockedCount = true;
 					count++;
+					lockedCount = false;
+					Monitor.Pulse(thisLock);
 				}
-				finally
-				{
-					Monitor.Exit(thisLock);
-				}
-				Thread.Sleep(1);
 			}
 		}
 
@@ -45,16 +46,16 @@ namespace CsPro
 			int loopCount = LOOP_COUNT;
 			while (loopCount-- > 0)
 			{
-				Monitor.Enter(thisLock);
-				try
+				lock (thisLock)
 				{
+					while (count < 0 || lockedCount == true)
+						Monitor.Wait(thisLock);
+
+					lockedCount = true;
 					count--;
+					lockedCount = false;
+					Monitor.Pulse(thisLock);
 				}
-				finally
-				{
-					Monitor.Exit(thisLock);
-				}
-				Thread.Sleep(1);
 			}
 		}
 	}
