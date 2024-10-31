@@ -4,61 +4,67 @@ using System.Threading;
 
 namespace CsPro
 {
-	class SideTask
+	class Counter 
 	{
-		int count;
+		const int LOOP_COUNT = 100;
+		readonly object thisLock;
 
-		public SideTask(int count)
+		private int count; 
+		public int Count
 		{
-			this.count = count;
+			get { return count; } 
 		}
 
-		public void KeepAlive()
+		public Counter()
 		{
-			try
-			{
-				Console.WriteLine("Running thread isn't gonna be interrupted");
-				Thread.SpinWait(100000000);
+			thisLock = new object();
+			count = 0;	
+		}
 
-				while (count > 0)
+		public void Increase()
+		{
+			int loopCount = LOOP_COUNT;
+
+			while (loopCount-- > 0)
+			{
+				lock (thisLock)
 				{
-					Console.WriteLine($"{count--} left");
-
-					Console.WriteLine("Entering into WaitJoinSleep State...");
-					Thread.Sleep(10);
+					count++;
 				}
-				Console.WriteLine("Count: 0");
-			}
-			catch (ThreadInterruptedException e)
-			{
-				Console.WriteLine(e);
-			}
-			finally
-			{
-				Console.WriteLine("Clearing resource...");
+				Thread.Sleep(1);
 			}
 		}
 
+		public void Decrease()
+		{
+			int loopCount = LOOP_COUNT;
+			while (loopCount-- > 0)
+			{
+				lock (thisLock)
+				{
+					count--;
+				}
+				Thread.Sleep(1);
+			}
+		}
 	}
 
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			SideTask task = new SideTask(100);
-			Thread t1 = new Thread(new ThreadStart(task.KeepAlive));
-			t1.IsBackground = false;
+			Counter counter = new Counter();
 
-			Console.WriteLine("Starting thread..."); 
-			t1.Start();			
+			Thread incThread = new (counter.Increase); 
+			Thread decThread = new (() => counter.Decrease()); 
 
-			Console.WriteLine("Interrupting thread...");
-			t1.Interrupt();
+			incThread.Start();	
+			decThread.Start();
 
-			Console.WriteLine("Waiting until thread stops...");
-			t1.Join();
+			incThread.Join();
+			decThread.Join();
 
-			Console.WriteLine("Finished"); 
+			Console.WriteLine(counter.Count);
 		}
 	}
 }
