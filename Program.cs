@@ -1,11 +1,10 @@
-﻿
-namespace CsPro
+﻿namespace CsPro
 {
-	class TestClass
+	class Test
 	{
 		int[] array = [10, 20, 30, 40, 50];
-
-		//인덱서 시작 
+		int index;
+ 
 		public int this[int index]
 		{
 			get
@@ -32,12 +31,31 @@ namespace CsPro
 			}
 		}
 
-		//ArrayLength 속성 
+		public int Array
+		{
+			get
+			{
+				return array[index];
+			}
+			set
+			{
+				array[index] = value;
+			}
+		}
+		
 		public int ArrayLength
 		{
 			get
 			{
 				return array.Length;
+			}
+		}
+
+		public int Index
+		{
+			set
+			{
+				index = value; 
 			}
 		}
 	}
@@ -46,12 +64,15 @@ namespace CsPro
 	{
 		static void Main(string[] args)
 		{
-			TestClass test = new TestClass(); 
-			test[2] = 600; 
+			Test test = new Test(); 
+			test[2] = 700; 
 			for (int i = 0; i < test.ArrayLength; i++)
 			{
 				Console.WriteLine($"{test[i]}"); 
 			}
+
+			test.Index = 2; 
+			Console.WriteLine(test.Array); 
 		}
 	}
 }
