@@ -1,52 +1,57 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic; 
-using System.Threading;
-using System.Threading.Tasks;
-
+﻿
 namespace CsPro
 {
+	class TestClass
+	{
+		int[] array = [10, 20, 30, 40, 50];
+
+		//인덱서 시작 
+		public int this[int index]
+		{
+			get
+			{
+				if (index >= 0 && index < array.Length)
+				{
+					return array[index];
+				}
+				else
+				{
+					return -1;
+				}
+			}
+			set
+			{
+				if (index >= 0 && index < array.Length)
+				{
+					array[index] = value;
+				}
+				else
+				{
+					Console.WriteLine("array 범위를 벗어났습니다.");
+				}
+			}
+		}
+
+		//ArrayLength 속성 
+		public int ArrayLength
+		{
+			get
+			{
+				return array.Length;
+			}
+		}
+	}
+
 	class Program
 	{
-		// 파일 복사 후 복사한 파일 용량 반환 
-		static async Task<long> CopyAsync(string FromPath, string ToPath)
-		{
-			using var fromStream = new FileStream(FromPath, FileMode.Open); 
-			{
-				long totalCopied = 0;
-
-				using var toStream = new FileStream(ToPath, FileMode.Create); 
-				{
-					byte[] buffer = new byte[1024];
-					int nRead = 0;
-					while ((nRead = await fromStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
-					{
-						await toStream.WriteAsync(buffer, 0, nRead);
-						totalCopied += nRead;
-					}
-				}
-
-				return totalCopied;
-			}
-		}
-
-		static async void DoCopy(string FromPath, string ToPath)
-		{
-			long totalCopied = await CopyAsync(FromPath, ToPath);
-			Console.WriteLine($"Copied Total {totalCopied} Bytes."); 
-		}
-
 		static void Main(string[] args)
 		{
-			if (args.Length < 2)
+			TestClass test = new TestClass(); 
+			test[2] = 600; 
+			for (int i = 0; i < test.ArrayLength; i++)
 			{
-				Console.WriteLine("Usage: ./CsPro <source> <destination>");
-				return; 
+				Console.WriteLine($"{test[i]}"); 
 			}
-
-			DoCopy(args[0], args[1]);
-
-			Console.WriteLine(); 
 		}
 	}
 }
