@@ -5,9 +5,9 @@ namespace CsPro
 
 	class Test
 	{
-		public void Hello()
+		public static void Hello()
 		{
-			Console.WriteLine("Hello World!"); 
+			Console.WriteLine("Test 클래스의 static Hello()"); 
 		}
 
 	}
@@ -16,11 +16,7 @@ namespace CsPro
 	{
 		static void Main(string[] args)
 		{
-			Test t = new();
-			t.Hello(); 
-
-			//메서드의 참조가 들어감 
-			MyDelegate hello = t.Hello;
+			MyDelegate hello = Test.Hello; 
 			hello(); 
 		}
 	}
