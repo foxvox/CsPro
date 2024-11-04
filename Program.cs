@@ -5,10 +5,16 @@ namespace CsPro
 	{
 		static void Main(string[] args)
 		{
-			StreamWriter sw = new StreamWriter(new FileStream(@"c:/csharpex/write.txt", FileMode.Create));
-			sw.WriteLine("Hello World!");
-			sw.Close();
-			Console.WriteLine("파일에 정상적으로 문자열을 추가하였습니다."); 
+			FileInfo f = new FileInfo(@"c:/csharpex/test.txt");
+			if (f.Exists)
+			{
+				f.CopyTo(@"c:/csharpex/test2.txt");
+				Console.WriteLine("파일이 정상적으로 복사되었습니다.");
+			}
+			else
+			{
+				Console.WriteLine("파일이 존재하지 않습니다."); 
+			}
 		}
 	}
 }
