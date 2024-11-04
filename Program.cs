@@ -8,8 +8,8 @@ namespace CsPro
 			FileInfo f = new FileInfo(@"c:/csharpex/test.txt");
 			if (f.Exists)
 			{
-				f.CopyTo(@"c:/csharpex/test2.txt");
-				Console.WriteLine("파일이 정상적으로 복사되었습니다.");
+				f.Delete();
+				Console.WriteLine("파일이 삭제되었습니다."); 
 			}
 			else
 			{
