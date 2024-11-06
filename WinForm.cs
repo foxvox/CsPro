@@ -3,33 +3,44 @@ namespace CsPro
 {
 	delegate void MyTextChangedEventHandler(object send, EventArgs e);
 
-	class MyForm 
+	class WinForm 
 	{
 		private MyTextBox? myTextBox1; 
+		private MyTextBox? myTextBox2; 
 
 		static void Main(string[] args)
 		{
-			MyForm myForm1 = new MyForm();
+			WinForm myForm1 = new WinForm();
 			myForm1.Run(); 
 		}
 
 		public void Run()
 		{
 			myTextBox1 = new("C++");
+			myTextBox2 = new("C"); 
 
 			//TextChanged 대리자에 의해 실행될 함수를 미리 할당해 둔다. 
 			myTextBox1.TextChanged += new(MyTextBox1_TextChanged1); 
 			myTextBox1.TextChanged += new(MyTextBox1_TextChanged2);
 
+			myTextBox2.TextChanged += new(MyTextBox1_TextChanged1);
+			myTextBox2.TextChanged += new(MyTextBox1_TextChanged2);
+
 			//C++ 출력 
-			myTextBox1.Paint();
+			myTextBox1.Paint(); 
+			
+			//C 출력			
+			myTextBox2.Paint();
 
 			//myTextBox1의 Text속성이 set되면서 OnTextChanged 함수 호출
 			//OnTextChanged 함수 안에서 TextChanged 함수가 호출된다. 	
 			myTextBox1.Text = "C#";
 
+			myTextBox2.Text = "Java"; 
 			//C# 출력 
-			myTextBox1.Paint(); 
+			myTextBox1.Paint();
+			//Java 출력 
+			myTextBox2.Paint();
 		}
 
 		public void MyTextBox1_TextChanged1(object send, EventArgs e)
@@ -39,7 +50,10 @@ namespace CsPro
 
 		public void MyTextBox1_TextChanged2(object send, EventArgs e)
 		{
-			Console.WriteLine("변경된 텍스트는 {0}입니다.\n", myTextBox1.Text); 
+			if (myTextBox1 != null)
+			{
+				Console.WriteLine("변경된 텍스트는 {0}입니다.\n", ((MyTextBox)send).Text); 
+			}
 		}
 	}
 
@@ -47,7 +61,7 @@ namespace CsPro
 	{
 		private string text;
 
-		public event MyTextChangedEventHandler TextChanged;
+		public event MyTextChangedEventHandler? TextChanged;
 
 		public MyTextBox(string str)			
 		{
