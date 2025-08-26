@@ -1,0 +1,15 @@
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\bin\Debug\net8.0\ProEx01.exe
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\bin\Debug\net8.0\ProEx01.deps.json
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\bin\Debug\net8.0\ProEx01.runtimeconfig.json
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\bin\Debug\net8.0\ProEx01.dll
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\bin\Debug\net8.0\ProEx01.pdb
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\ProEx01.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\ProEx01.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\ProEx01.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\ProEx01.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\ProEx01.sourcelink.json
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\ProEx01.dll
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\refint\ProEx01.dll
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\ProEx01.pdb
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\ProEx01.genruntimeconfig.cache
+C:\Users\Administrator\Desktop\CsPro\ayPro\ProEx01\obj\Debug\net8.0\ref\ProEx01.dll

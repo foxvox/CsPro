@@ -12,3 +12,4 @@ C:\Users\Administrator\Desktop\CsPro\ayPro\Pro\obj\Debug\net8.0\refint\Pro.dll
 C:\Users\Administrator\Desktop\CsPro\ayPro\Pro\obj\Debug\net8.0\Pro.pdb
 C:\Users\Administrator\Desktop\CsPro\ayPro\Pro\obj\Debug\net8.0\Pro.genruntimeconfig.cache
 C:\Users\Administrator\Desktop\CsPro\ayPro\Pro\obj\Debug\net8.0\ref\Pro.dll
+C:\Users\Administrator\Desktop\CsPro\ayPro\Pro\obj\Debug\net8.0\Pro.sourcelink.json

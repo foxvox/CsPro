@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{665E21DA-5F98-46B9-B406-A476AC4A4189}|Pro\\Pro.csproj|c:\\users\\administrator\\desktop\\cspro\\aypro\\pro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{665E21DA-5F98-46B9-B406-A476AC4A4189}|Pro\\Pro.csproj|solutionrelative:pro\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{665E21DA-5F98-46B9-B406-A476AC4A4189}|Pro\\Pro.csproj|c:\\users\\administrator\\desktop\\cspro\\aypro\\pro\\utility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{665E21DA-5F98-46B9-B406-A476AC4A4189}|Pro\\Pro.csproj|solutionrelative:pro\\utility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,21 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Utility.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\CsPro\\ayPro\\Pro\\Utility.cs",
-              "RelativeDocumentMoniker": "Pro\\Utility.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Desktop\\CsPro\\ayPro\\Pro\\Utility.cs",
-              "RelativeToolTip": "Pro\\Utility.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAADwvx8AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T05:33:55.888Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -41,7 +24,7 @@
               "RelativeDocumentMoniker": "Pro\\Program.cs",
               "ToolTip": "C:\\Users\\Administrator\\Desktop\\CsPro\\ayPro\\Pro\\Program.cs",
               "RelativeToolTip": "Pro\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-25T04:15:07.774Z",
               "EditorCaption": ""

@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Dic.cs" />
+    <Compile Remove="Utility.cs" />
+  </ItemGroup>
+
 </Project>
