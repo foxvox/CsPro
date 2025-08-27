@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Compile Remove="Dic.cs" />
+    <Compile Remove="ProEx.cs" />
     <Compile Remove="Utility.cs" />
   </ItemGroup>
 
