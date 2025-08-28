@@ -9,8 +9,16 @@
 
   <ItemGroup>
     <Compile Remove="Dic.cs" />
+    <Compile Remove="Forrest.cs" />
+    <Compile Remove="Grassland.cs" />
+    <Compile Remove="ICoverable.cs" />
     <Compile Remove="ProEx.cs" />
+    <Compile Remove="Quest.cs" />
+    <Compile Remove="Reward.cs" />
+    <Compile Remove="Service.cs" />
+    <Compile Remove="Terrain.cs" />
     <Compile Remove="Utility.cs" />
+    <Compile Remove="Wetland.cs" />
   </ItemGroup>
 
 </Project>
