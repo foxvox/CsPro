@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Pro
 {
-    internal interface IEnchanter
+    internal interface IMovable
     {
+        public void Move(); 
     }
 }

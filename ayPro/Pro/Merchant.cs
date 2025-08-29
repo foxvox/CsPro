@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Pro
 {
-    internal class Enchant 
+    internal class Merchant : ITradable
     {
-        public Enchant() { }
-        public void Upgrade(IEnchantable item) 
-        {
-            item.Upgrade(); 
-        }
+        public Merchant() { }
 
+        public void Trade()
+        {
+            Console.WriteLine("Shop Open"); 
+        }
     }
 }

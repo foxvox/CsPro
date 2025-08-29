@@ -30,13 +30,23 @@ namespace Pro
 
             #region 개방폐쇄원칙  
 
-            Enchant enchant = new Enchant();
+            //List<IEnchantable> enchantables = new List<IEnchantable>();
+            //enchantables.Add(new Sword("Sword", 10, 10, 10));  
+            //enchantables.Add(new Necklace("Necklace", 20, 20, 20));
+            //enchantables.Add(new Shoes("Shoes", 30, 30, 30));
 
-            enchant.Boost(new Item("Sword", 10, 5, 0));
-            enchant.Boost(new Item("Necklace", 1, 1, 10));
-            enchant.Boost(new Item("Shoes", 0, 20, 0)); 
+            //Enchant enchant = new Enchant();  
+
+            //foreach (var e in enchantables)
+            //{
+            //    enchant.Upgrade(e); 
+            //} 
 
             #endregion
+
+            #region 인터페이스분리원칙 
+
+            #endregion 
         }
     }
 }

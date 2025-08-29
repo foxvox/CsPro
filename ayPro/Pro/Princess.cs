@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Pro
 {
-    internal class Enchant 
+    internal class Princess : IMovable 
     {
-        public Enchant() { }
-        public void Upgrade(IEnchantable item) 
-        {
-            item.Upgrade(); 
-        }
+        public Princess() { }
 
+        public void Move() 
+        {
+            Console.WriteLine("Princess Move"); 
+        }
     }
 }

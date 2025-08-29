@@ -9,13 +9,19 @@
 
   <ItemGroup>
     <Compile Remove="Dic.cs" />
+    <Compile Remove="Enchant.cs" />
     <Compile Remove="Forrest.cs" />
     <Compile Remove="Grassland.cs" />
     <Compile Remove="ICoverable.cs" />
+    <Compile Remove="IEnchantable.cs" />
+    <Compile Remove="Item.cs" />
+    <Compile Remove="Necklace.cs" />
     <Compile Remove="ProEx.cs" />
     <Compile Remove="Quest.cs" />
     <Compile Remove="Reward.cs" />
     <Compile Remove="Service.cs" />
+    <Compile Remove="Shoes.cs" />
+    <Compile Remove="Sword.cs" />
     <Compile Remove="Terrain.cs" />
     <Compile Remove="Utility.cs" />
     <Compile Remove="Wetland.cs" />
